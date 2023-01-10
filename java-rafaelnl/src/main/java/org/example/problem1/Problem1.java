@@ -1,15 +1,8 @@
-package problem1;
+package org.example.problem1;
 
 public class Problem1 {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		//int i;
-		
-		int[] nums = new int[] {2,7,11,15};
-		int target = 9;
-		
-		
+    private int[] twoSums(int[] nums, int target){
         int i,j;
         int idxA=0,idxB=0;
 
@@ -24,8 +17,16 @@ public class Problem1 {
                 }
             }
         }
-        //return new int[]{idxA,idxB};
+        System.out.println(idxA);
+        System.out.println(idxB);
+        return new int[]{idxA,idxB};
+    }
 
-	}
+
+    //Two sums
+    public static void main(String[] args) {
+        Problem1 app = new Problem1();
+        app.twoSums(new int[] {2,7,11,15}, 9);
+    }
 
 }
