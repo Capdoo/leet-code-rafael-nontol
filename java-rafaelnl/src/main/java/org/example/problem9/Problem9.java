@@ -20,11 +20,24 @@ public class Problem9 {
         return res;
     }
 
+    public boolean isPalindromeV2(int src){
+        if(src < 0) return false;
+        int reversed = 0, remainder, original = src;
+        while(src != 0){
+            remainder = src%10;
+            reversed = reversed*10 + remainder;
+            src = src/10;
+        }
+        return original == reversed;
+    }
+
 
     public static void main(String[] args) {
         Problem9 problem9 = new Problem9();
         boolean res = problem9.isPalindrome(19091);
+        boolean res2 = problem9.isPalindromeV2(19091);
         System.out.println(res);
+        System.out.println(res2);
     }
 
     public int getSizeNumber(int number){
