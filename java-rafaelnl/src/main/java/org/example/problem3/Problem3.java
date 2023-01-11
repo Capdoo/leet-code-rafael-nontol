@@ -8,7 +8,7 @@ import java.util.Set;
 public class Problem3 {
 
 
-    public int lengthLogestSubstringNoRepeated(String src){
+    public int lengthLogestSubstringNoRepeated(String s){
         //max of one = 8
         //max of two = 7
         //max of three = 6
@@ -16,8 +16,10 @@ public class Problem3 {
         //max of seven = 2
         //max of eight = 1
 
-        String[] vals = src.split("");
-        //int maxPossible = vals.length;
+        if(s.length() == 0){
+            return 0;
+        }
+        String[] vals = s.split("");
         int maxPossible = 1;
         int myLongest = 0;
 
@@ -27,7 +29,38 @@ public class Problem3 {
             //Create all possible substrings
             int pos;
             int start = 0;
+
             for (int j = 0; j < maxPossible; j++) {
+
+                pos = start;
+                System.out.println("Para "+(i+1)+" se pueden  "+maxPossible+" grupos");
+                //Evaluacion
+
+                //Para manana la verdad funciona lo comentado pero la idea es no crear una nueva cadena
+                //solo leer de src con los limites, bueno con el inicio noma
+                //el final se obtiene por la distancia del substring
+                //no funciona con el test case de abajo> REVISAR
+
+                boolean res = true;
+                for (int k = pos; k < (i+1); k++) {
+                    //substring: vals[k]
+                    String single = vals[k];
+
+                    for (int l = 0; l < (i+1); l++) {
+                        if(single.equals(vals[l]) && k != l){
+                            res = false;
+                        }
+                    }
+                    System.out.println(single);
+                }
+                if(res) return i;
+
+                start++;
+
+
+
+
+                /*
                 String[] subString = new String[i+1];
                 System.out.println("Para "+(i+1)+" se pueden  "+maxPossible+" grupos");
                 //fill substring
@@ -55,6 +88,7 @@ public class Problem3 {
                     if(local > 1) res = false;
                 }
                 if(res) return subString.length;
+                */
             }
             maxPossible++;
         }
@@ -66,7 +100,7 @@ public class Problem3 {
     public static void main(String[] args) {
         Problem3 problem3 = new Problem3();
         //int res = problem3.lengthLogestSubstringNoRepeated("abcabcbb");
-        int res = problem3.lengthLogestSubstringNoRepeated("s=");
+        int res = problem3.lengthLogestSubstringNoRepeated("pwwkew");
         System.out.println(res);
     }
 
