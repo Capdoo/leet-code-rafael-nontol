@@ -7,8 +7,10 @@ import java.util.Set;
 
 public class Problem3 {
 
-
     public int lengthLogestSubstringNoRepeated(String s){
+
+        boolean is_possible;
+
         //max of one = 8
         //max of two = 7
         //max of three = 6
@@ -16,91 +18,71 @@ public class Problem3 {
         //max of seven = 2
         //max of eight = 1
 
-        if(s.length() == 0){
-            return 0;
-        }
-        String[] vals = s.split("");
-        int maxPossible = 1;
+        if(s.length() == 0) return 0;
+
+        int cuantos = 1;
         int myLongest = 0;
 
+        int pos_inicial, pos_relativa, pos_aux;
+        char target;
 
-        for (int i = vals.length-1; i >= 0; i--) {
-            //i+1 : size of all possible substrings
-            //Create all possible substrings
-            int pos;
-            int start = 0;
+        for (int i = s.length(); i >= 1; i--) {
+            //i : length of substring
+            System.out.println("Para "+i+" hay "+cuantos+" objetos posibles");
 
-            for (int j = 0; j < maxPossible; j++) {
+            pos_inicial = 0;
+            for (int j = 0; j < cuantos; j++) {
 
-                pos = start;
-                System.out.println("Para "+(i+1)+" se pueden  "+maxPossible+" grupos");
-                //Evaluacion
+                //Block for a new substring
+                String msg = "";
+                pos_relativa = pos_inicial;
+                is_possible = true;
+                for (int k = 0; k < i; k++) {
 
-                //Para manana la verdad funciona lo comentado pero la idea es no crear una nueva cadena
-                //solo leer de src con los limites, bueno con el inicio noma
-                //el final se obtiene por la distancia del substring
-                //no funciona con el test case de abajo> REVISAR
+                    //Un substring
+                    msg+=s.charAt(pos_relativa);
+                    target = s.charAt(pos_relativa);
 
-                boolean res = true;
-                for (int k = pos; k < (i+1); k++) {
-                    //substring: vals[k]
-                    String single = vals[k];
+                    //Do evaluation
+                    pos_aux = pos_inicial;
+                    String msg_aux = "";
+                    for (int l = 0; l < i; l++) {
 
-                    for (int l = 0; l < (i+1); l++) {
-                        if(single.equals(vals[l]) && k != l){
-                            res = false;
+                        //msg_aux += vals[pos_aux];
+                        msg_aux += s.charAt(pos_aux);
+
+                        if(target == s.charAt(pos_aux) && pos_relativa!=pos_aux){
+                            is_possible = false;
                         }
+                        pos_aux++;
                     }
-                    System.out.println(single);
+                    System.out.println("for :"+target+ " for eval: "+msg_aux+" res: "+is_possible);
+
+                    pos_relativa++;
                 }
-                if(res) return i;
+                System.out.println("cadena generada: "+msg);
+                pos_inicial++;
 
-                start++;
+                if (is_possible) return i;
 
-
-
-
-                /*
-                String[] subString = new String[i+1];
-                System.out.println("Para "+(i+1)+" se pueden  "+maxPossible+" grupos");
-                //fill substring
-                pos = start;
-                for (int k = 0; k < subString.length; k++) {
-                    System.out.println("Pos va asi: "+pos);
-                    subString[k] = vals[pos];
-                    pos++;
-                }
-                start++;
-
-                //Check if there's repeated
-                List<String> listAux = Arrays.asList(subString);
-                listAux.forEach(System.out::println);
-                Set<String> uniques = new HashSet<>(listAux);
-                boolean res = true;
-
-                for (String p:uniques) {
-                    int local = 0;
-                    for (int m = 0; m < subString.length; m++) {
-                        if(p.equals(subString[m])){
-                            local++;
-                        }
-                    }
-                    if(local > 1) res = false;
-                }
-                if(res) return subString.length;
-                */
             }
-            maxPossible++;
+            cuantos++;
+
         }
 
         return myLongest;
-
     }
 
     public static void main(String[] args) {
         Problem3 problem3 = new Problem3();
-        //int res = problem3.lengthLogestSubstringNoRepeated("abcabcbb");
-        int res = problem3.lengthLogestSubstringNoRepeated("pwwkew");
+        int res = problem3.lengthLogestSubstringNoRepeated("abcabcbb");
+        //int res = problem3.lengthLogestSubstringNoRepeated("pwwkew");
+        //int res = problem3.lengthLogestSubstringNoRepeated("bbbbb");
+        //int res = problem3.lengthLogestSubstringNoRepeated("kggqtmpfxewkqccehsluxmrbgcpmnwwzcdsxrhcolbbdddhmv");
+        //int res = problem3.lengthLogestSubstringNoRepeated("xbkzbrrwmrmqgqcbuxdtwuuloqfargoqkzrlqiiecwukozljwpeulyharmckvrafsrqibaody");
+
+
+
         System.out.println(res);
     }
 
