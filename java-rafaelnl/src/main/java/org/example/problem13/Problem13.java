@@ -21,7 +21,7 @@ public class Problem13 {
         int sum = 0;
         int aux;
         for(int i = 0; i<src.length; i++){
-            //first
+            //first-case
             if (src[i] == 'I' && i+1 < src.length){
                 if(src[i+1] == 'V' || src[i+1] == 'X'){
                     aux = map.get(src[i+1])-map.get(src[i]);
@@ -31,7 +31,7 @@ public class Problem13 {
                     sum += map.get(src[i]);
                 }
             }
-            //second
+            //second-case
             else if (src[i] == 'X' && i+1 < src.length){
                 if(src[i+1] == 'L' || src[i+1] == 'C'){
                     aux = map.get(src[i+1])-map.get(src[i]);
@@ -41,7 +41,7 @@ public class Problem13 {
                     sum += map.get(src[i]);
                 }
             }
-            //Third
+            //third-case
             else if (src[i] == 'C' && i+1 < src.length){
                 if(src[i+1] == 'D' || src[i+1] == 'M'){
                     aux = map.get(src[i+1])-map.get(src[i]);
