@@ -1,5 +1,6 @@
 package org.example.problem13;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Problem13 {
